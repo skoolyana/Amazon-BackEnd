@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: USER-SERVICE
+  profiles:
+    actine:
+    - dev
+    
+    
+    
