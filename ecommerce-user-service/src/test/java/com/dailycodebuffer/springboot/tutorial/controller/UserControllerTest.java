@@ -45,8 +45,7 @@ public class UserControllerTest {
 	// This object will be magically initialized by the initFields method below.
 	private JacksonTester<UserDto> json;
 
-	// This object will be magically initialized by the initFields method below.
-	private JacksonTester<Collection<UserDto>> jsonCollective;
+
 
 	private UserDto userDto;
 
