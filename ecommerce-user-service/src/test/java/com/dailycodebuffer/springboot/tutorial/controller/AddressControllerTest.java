@@ -114,7 +114,7 @@ public class AddressControllerTest {
 
 	@Test
 
-	public void shouldCreateNewUser() throws Exception {
+	public void shouldCreateNewAddress() throws Exception {
 
 		given(addressService.save(addressDto)).willReturn(addressDto);
 
@@ -131,7 +131,7 @@ public class AddressControllerTest {
 
 	}
 
-	// JUnit test for updateUser method in Controller
+	// JUnit test for updateAddress method in Controller
 
 	@DisplayName("JUnit test for updateAddress method")
 
