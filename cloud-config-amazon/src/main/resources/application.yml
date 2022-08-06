@@ -1,0 +1,16 @@
+
+server:
+  port: 9296
+  
+  
+spring:
+  application:
+    name: CLOUD-CONFIG
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/skoolyana/amazon-cloud-config
+          clone-on-start: true
+    
+    
