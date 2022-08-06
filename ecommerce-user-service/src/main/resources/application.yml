@@ -1,10 +1,15 @@
 
+server:
+  servlet:
+    context-path: /user-service
 
 
 spring:
-  application:
+   zipkin:
+    base-url: ${SPRING_ZIPKIN_BASE_URL:http://localhost:9411/}
+   application:
     name: USER-SERVICE
-  profiles:
+   profiles:
     active:
     - dev
     
