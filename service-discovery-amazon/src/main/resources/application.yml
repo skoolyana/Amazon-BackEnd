@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: SERVICE-DISCOVERY
+  profiles:
+    active:
+    - dev

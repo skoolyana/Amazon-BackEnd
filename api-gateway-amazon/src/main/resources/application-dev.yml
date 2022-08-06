@@ -1,0 +1,22 @@
+server:
+  port: 8080
+  error:
+    whitelabel:
+      enabled: false
+      
+      
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+      springframework:
+        web: DEBUG
+        data: DEBUG
+      boot:
+        autoconfigure:
+          data:
+            rest: DEBUG
+            jpa: DEBUG
+            orm: DEBUG

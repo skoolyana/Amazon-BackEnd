@@ -6,10 +6,11 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
 @EnableEurekaClient
-public class EcommerceUserServiceApplication {
+
+public class ApiGatewayAmazonApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EcommerceUserServiceApplication.class, args);
+		SpringApplication.run(ApiGatewayAmazonApplication.class, args);
 	}
 
 }

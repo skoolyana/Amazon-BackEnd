@@ -84,8 +84,23 @@ public class UserServiceImpl implements UserService {
 
 		log.info("*** UserDto, service; update user with userId *");
 
+		UserDto userDtoVar = this.findById(userId);
 		
-		return UserMappingHelper.map(this.userRepository.save(UserMappingHelper.map(this.findById(userId))));
+		
+		if(userDtoVar==null)
+		{
+			throw new UserObjectNotFoundException();
+		}
+		
+		userDtoVar.setFirstName(userDto.getFirstName());
+		userDtoVar.setLastName(userDto.getLastName());
+		userDtoVar.setEmail(userDto.getEmail());
+		userDtoVar.setPhone(userDto.getPhone());
+		userDtoVar.setImageUrl(userDto.getImageUrl());
+		
+		
+		
+		return UserMappingHelper.map(this.userRepository.save(UserMappingHelper.map(userDtoVar)));
 
 	}
 

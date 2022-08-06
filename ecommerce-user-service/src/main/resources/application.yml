@@ -1,9 +1,13 @@
+
+
+
 spring:
   application:
     name: USER-SERVICE
   profiles:
-    actine:
+    active:
     - dev
+    
     
     
     
