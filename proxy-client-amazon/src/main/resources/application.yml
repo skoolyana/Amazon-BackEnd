@@ -1,0 +1,18 @@
+
+server:
+  servlet:
+    context-path: /app
+
+
+spring:
+   zipkin:
+    base-url: ${SPRING_ZIPKIN_BASE_URL:http://localhost:9411/}
+   application:
+    name: PROXY-CLIENT
+   profiles:
+    active:
+    - dev
+    
+    
+    
+    
