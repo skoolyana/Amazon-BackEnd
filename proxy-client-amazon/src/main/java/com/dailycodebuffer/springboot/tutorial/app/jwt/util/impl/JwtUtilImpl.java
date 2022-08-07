@@ -7,6 +7,7 @@ import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import com.dailycodebuffer.springboot.tutorial.app.jwt.util.JwtUtil;
 
@@ -14,6 +15,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+
+@Component
 public class JwtUtilImpl implements JwtUtil {
 
     @Value("${jwt.secret}")

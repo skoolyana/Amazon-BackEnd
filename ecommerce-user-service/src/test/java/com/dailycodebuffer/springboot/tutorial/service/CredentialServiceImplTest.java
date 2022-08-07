@@ -120,6 +120,43 @@ public class CredentialServiceImplTest {
 		}
 		
 		
+		
+		
+		// JUnit test for getUserById method
+				@DisplayName("JUnit test for getCredentialByName method")
+				@Test
+				public void givenCredentialName_whenGetCredentialByName_thenReturnCredentialObject() {
+
+					String username = "skulyana";
+					
+					given(credentialRepository.findByUsername(username)).willReturn(Optional.of(credential1));
+
+					// when
+					CredentialDto savedCredential = credentialServiceImpl.findByUsername(credential1.getUsername());
+
+					// then
+					assertThat(savedCredential).isNotNull();
+
+				}
+				
+				
+				@Test()
+				public void should_throw_exception_when_credential_by_name_doesnt_exist() {
+
+					String username = "skulyana";
+					
+	
+					given(credentialRepository.findByUsername(username)).willReturn(Optional.ofNullable(null));
+
+					
+					Assertions.assertThrows(CredentialNotFoundException.class,
+							() -> credentialServiceImpl.findByUsername(credential1.getUsername()));
+
+				}
+				
+		
+		
+		
 		// JUnit test for saveAddress method
 		@DisplayName("JUnit test for saveCredential method")
 		@Test

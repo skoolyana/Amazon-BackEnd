@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.dailycodebuffer.springboot.tutorial.dto.CredentialDto;
 import com.dailycodebuffer.springboot.tutorial.exception.wrapper.AddressNotFoundException;
 import com.dailycodebuffer.springboot.tutorial.exception.wrapper.CredentialNotFoundException;
+import com.dailycodebuffer.springboot.tutorial.exception.wrapper.UserObjectNotFoundException;
 import com.dailycodebuffer.springboot.tutorial.helper.AddressMappingHelper;
 import com.dailycodebuffer.springboot.tutorial.helper.CredentialMappingHelper;
 import com.dailycodebuffer.springboot.tutorial.repository.AddressRepository;
@@ -94,8 +95,8 @@ public class CredentialServiceImpl implements CredentialService {
 
 	@Override
 	public CredentialDto findByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		return CredentialMappingHelper.map(this.credentialRepository.findByUsername(username)
+				.orElseThrow(() -> new CredentialNotFoundException(String.format("#### Credential with username: %s not found! ####", username))));
 	}
 
 }

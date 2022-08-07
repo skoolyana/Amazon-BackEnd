@@ -5,6 +5,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.dailycodebuffer.springboot.tutorial.app.business.auth.model.request.AuthenticationRequest;
@@ -27,15 +28,19 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	private final JwtService jwtService;
 	
 	
+	
 	@Override
 	public AuthenticationResponse authenticate(AuthenticationRequest authenticationRequest) {
 	
 		log.info("** AuthenticationResponse, authenticate user service*\n");
 		
 		
+		UsernamePasswordAuthenticationToken authtoken = new UsernamePasswordAuthenticationToken(
+				authenticationRequest.getUsername(), new BCryptPasswordEncoder().encode(authenticationRequest.getPassword()));
+		
+		
 		try {
-			this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-					authenticationRequest.getUsername(), authenticationRequest.getPassword()));
+			this.authenticationManager.authenticate(authtoken);
 		}
 		catch (BadCredentialsException e) {
 			throw new IllegalAuthenticationCredentialsException("#### Bad credentials! ####");

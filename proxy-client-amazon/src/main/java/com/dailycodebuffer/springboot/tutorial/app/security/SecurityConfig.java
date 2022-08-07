@@ -21,56 +21,34 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	
 	private final UserDetailsService userDetailsService;
 	private final PasswordEncoder passwordEncoder;
-	
-	
+
 	@Override
 	protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(this.userDetailsService)
-			.passwordEncoder(this.passwordEncoder);
+		auth.userDetailsService(this.userDetailsService).passwordEncoder(this.passwordEncoder);
+
 	}
-	
-	
-	
+
 	@Override
 	protected void configure(final HttpSecurity http) throws Exception {
-		
-		
-		http.cors().disable()
-		.csrf().disable()
-		.authorizeRequests()
-			.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-			.antMatchers("/", "index", "**/css/**", "**/js/**").permitAll()
-			.antMatchers("/api/authenticate/**").permitAll()
-			.antMatchers("/api/categories/**").permitAll()
-			.antMatchers("/api/products/**").permitAll()
-			.antMatchers("/api/**")
-				.hasAnyRole(RoleBasedAuthority.ROLE_USER.getRole(), 
-						RoleBasedAuthority.ROLE_ADMIN.getRole())
-			.antMatchers("/actuator/health/**", "/actuator/info/**")
-				.permitAll()
-			.antMatchers("/actuator/**")
-				.hasAnyRole(RoleBasedAuthority.ROLE_ADMIN.getRole())
-			.anyRequest().authenticated()
-		.and()
-		.headers()
-			.frameOptions()
-			.sameOrigin()
-		.and()
-		.sessionManagement()
-			.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-		
-		
-		
-		
+
+		http.cors().disable().csrf().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+				.antMatchers("/", "index", "**/css/**", "**/js/**").permitAll().antMatchers("/api/authenticate/**")
+				.permitAll().antMatchers("/api/categories/**").permitAll().antMatchers("/api/products/**").permitAll()
+				.antMatchers("/api/**")
+				.hasAnyRole(RoleBasedAuthority.ROLE_USER.getRole(), RoleBasedAuthority.ROLE_ADMIN.getRole())
+				.antMatchers("/actuator/health/**", "/actuator/info/**").permitAll().antMatchers("/actuator/**")
+				.hasAnyRole(RoleBasedAuthority.ROLE_ADMIN.getRole()).anyRequest().authenticated().and().headers()
+				.frameOptions().sameOrigin().and().sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
 	}
-	
+
 	@Bean
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
-	
+
 }
