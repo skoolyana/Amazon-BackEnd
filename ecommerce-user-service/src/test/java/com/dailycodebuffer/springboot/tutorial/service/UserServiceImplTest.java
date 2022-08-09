@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.dailycodebuffer.springboot.tutorial.domain.Address;
 import com.dailycodebuffer.springboot.tutorial.domain.Credential;
@@ -40,6 +41,9 @@ public class UserServiceImplTest {
 
 	@Mock
 	private UserRepository userRepository;
+	
+	@Mock 
+	private PasswordEncoder passwordEncoder;
 
 	private User user1;
 
@@ -48,7 +52,7 @@ public class UserServiceImplTest {
 
 		// With this call to initMocks we tell Mockito to process the annotations
 		MockitoAnnotations.initMocks(this);
-		userServiceimpl = new UserServiceImpl(userRepository);
+		userServiceimpl = new UserServiceImpl(userRepository,passwordEncoder);
 
 		Set<Address> addressSet = new HashSet<>();
 

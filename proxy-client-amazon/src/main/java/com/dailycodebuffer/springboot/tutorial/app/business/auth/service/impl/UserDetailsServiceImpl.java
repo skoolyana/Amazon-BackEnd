@@ -26,7 +26,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	
 		log.info("**UserDetails, load user by username*\n");
 		
-		return new UserDetailsImpl(this.restTemplate.getForObject(API_URL + "/username/" + username, CredentialDto.class));
+		CredentialDto credDto = this.restTemplate.getForObject(API_URL + "/username/" + username, CredentialDto.class);
+		
+		
+		
+		return new UserDetailsImpl(credDto);
 	
 	}
 

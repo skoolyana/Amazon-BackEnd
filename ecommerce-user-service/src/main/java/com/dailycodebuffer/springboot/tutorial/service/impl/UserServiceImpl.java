@@ -5,8 +5,11 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.dailycodebuffer.springboot.tutorial.dto.CredentialDto;
 import com.dailycodebuffer.springboot.tutorial.dto.UserDto;
 import com.dailycodebuffer.springboot.tutorial.exception.wrapper.UserObjectNotFoundException;
 import com.dailycodebuffer.springboot.tutorial.helper.UserMappingHelper;
@@ -23,6 +26,8 @@ import lombok.extern.slf4j.Slf4j;
 public class UserServiceImpl implements UserService {
 	
 	private final UserRepository userRepository;
+	
+	private final PasswordEncoder passwordEncoder;
 	
 	
 	@Override
@@ -61,6 +66,18 @@ public class UserServiceImpl implements UserService {
 	public UserDto save(UserDto userDto) {
 		
 		log.info("*** UserDto, service; save user *");
+		
+		CredentialDto credDto =   userDto.getCredentialDto();
+		
+		if(credDto!=null)
+		{
+			credDto.setPassword(new BCryptPasswordEncoder().encode(credDto.getPassword()));
+			
+			userDto.setCredentialDto(credDto);
+		}
+		
+		
+		
 		
 		return UserMappingHelper.map(this.userRepository.save(UserMappingHelper.map(userDto)));
 		

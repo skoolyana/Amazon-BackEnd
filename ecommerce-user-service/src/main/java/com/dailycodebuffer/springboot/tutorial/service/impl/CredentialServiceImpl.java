@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.dailycodebuffer.springboot.tutorial.dto.CredentialDto;
@@ -28,6 +30,8 @@ import lombok.extern.slf4j.Slf4j;
 public class CredentialServiceImpl implements CredentialService {
 
 	private final CredentialRepository credentialRepository;
+	
+	private final PasswordEncoder passwordEncoder;
 	
 	@Override
 	public List<CredentialDto> findAll() {
@@ -59,6 +63,16 @@ public class CredentialServiceImpl implements CredentialService {
 	public CredentialDto save(CredentialDto credentialDto) {
 		// TODO Auto-generated method stub
 		log.info("*** CredentialDto, service; save credential *");
+		
+		CredentialDto credDto =   credentialDto;
+		
+		if(credDto!=null)
+		{
+			credDto.setPassword(new BCryptPasswordEncoder().encode(credDto.getPassword()));
+			
+			credentialDto = credDto ;
+		}
+		
 
 		return CredentialMappingHelper.map(this.credentialRepository.save(CredentialMappingHelper.map(credentialDto)));
 

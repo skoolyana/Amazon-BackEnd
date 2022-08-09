@@ -16,6 +16,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.dailycodebuffer.springboot.tutorial.domain.Address;
 import com.dailycodebuffer.springboot.tutorial.domain.Credential;
@@ -40,6 +41,8 @@ public class CredentialServiceImplTest {
 	
 	private Credential credential1;
 	
+	@Mock
+	private PasswordEncoder passwordEmncoder;
 	
 	
 	@BeforeEach
@@ -47,7 +50,7 @@ public class CredentialServiceImplTest {
 
 		// With this call to initMocks we tell Mockito to process the annotations
 		MockitoAnnotations.initMocks(this);
-		credentialServiceImpl = new CredentialServiceImpl(credentialRepository);
+		credentialServiceImpl = new CredentialServiceImpl(credentialRepository,passwordEmncoder);
 
 		credential1 = Credential.builder().credentialId(1).isAccountNonExpired(true).isAccountNonLocked(true).password("password").username("skulyana")
 				.user(User.builder().email("skulyana@gmail.com").firstName("Sunil").imageUrl("www.google.com").lastName("Kulyana").build()).build();

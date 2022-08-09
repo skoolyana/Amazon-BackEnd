@@ -34,10 +34,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	
 		log.info("** AuthenticationResponse, authenticate user service*\n");
 		
-		
 		UsernamePasswordAuthenticationToken authtoken = new UsernamePasswordAuthenticationToken(
-				authenticationRequest.getUsername(), new BCryptPasswordEncoder().encode(authenticationRequest.getPassword()));
-		
+				authenticationRequest.getUsername(), authenticationRequest.getPassword());
 		
 		try {
 			this.authenticationManager.authenticate(authtoken);
@@ -51,8 +49,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 		
 		final String token = this.jwtService.generateToken(userDetails);
 		
-		return new AuthenticationResponse(token);
 		
+		return new AuthenticationResponse(token);		
 		  
 	}
 
