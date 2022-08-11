@@ -1,4 +1,4 @@
-package com.dailycodebuffer.springboot.tutorial;
+package com.dailycodebuffer.springboot.tutorial.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
