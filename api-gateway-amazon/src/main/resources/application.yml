@@ -40,3 +40,8 @@ spring:
         uri: lb://PROXY-CLIENT
         predicates:
         - Path=/app/**
+          
+      - id: PRODUCT-SERVICE
+        uri: lb://PRODUCT-SERVICE
+        predicates:
+        - Path=/product-service/**   
